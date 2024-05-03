@@ -137,5 +137,6 @@ class mongodb:
         else:
             return f"file already exists of size: {self.__get_size(local_data_path)}"
 
+    @ensure_annotations
     def get_data(self, database_name: str, collection_name: str, local_data_path: Path, root_dir: str) -> str:
         return self.__export_data_into_file_path(database_name, collection_name, local_data_path, root_dir)
