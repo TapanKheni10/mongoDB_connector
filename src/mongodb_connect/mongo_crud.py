@@ -25,7 +25,6 @@ class mongodb:
         except Exception as e:
             raise e
         
-    @ensure_annotations
     def __create_database(self, database_name: str):
         client = self.__connect_to_db()
         database = client[database_name]
@@ -33,7 +32,6 @@ class mongodb:
 
         return database
     
-    @ensure_annotations
     def __create_collection(self, collection_name: str, database_name: str):
         if database_name == None:
             database = self.__create_database(self.database_name)
@@ -114,7 +112,6 @@ class mongodb:
             if verbose:
                 print(f"created directory at: {path}")
 
-    @ensure_annotations
     def __export_collection_as_dataframe(self, database_name: str, collection_name: str) -> pd.DataFrame:
         client = self.__connect_to_db()
 
@@ -127,7 +124,6 @@ class mongodb:
 
         return df
     
-    @ensure_annotations
     def __export_data_into_file_path(self, database_name: str, collection_name: str, local_data_path: Path, root_dir: str) -> str:
 
         data = self.__export_collection_as_dataframe(database_name, collection_name)
@@ -141,6 +137,5 @@ class mongodb:
         else:
             return f"file already exists of size: {self.__get_size(local_data_path)}"
 
-    @ensure_annotations
     def get_data(self, database_name: str, collection_name: str, local_data_path: Path, root_dir: str) -> str:
         return self.__export_data_into_file_path(database_name, collection_name, local_data_path, root_dir)
