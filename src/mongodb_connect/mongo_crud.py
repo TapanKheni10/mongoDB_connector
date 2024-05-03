@@ -15,7 +15,7 @@ class mongodb:
         self.collection_name = collection_name
 
     def __connect_to_db(self) -> MongoClient:
-        client: MongoClient = MongoClient(self.client_url)
+        client: MongoClient = MongoClient(self.client_url) #type: ignore
 
         try:
             client.admin.command('ping')
